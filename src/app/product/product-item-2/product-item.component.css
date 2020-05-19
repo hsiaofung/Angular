@@ -1,0 +1,13 @@
+.promotion {
+  color: red;
+}
+.normal {
+  color: green;
+}
+.product {
+  text-align: center;
+}
+.cart {
+  background: black;
+  color: white;
+}
