@@ -1,0 +1,18 @@
+<p>stock-item works!</p>
+<div class="stock-container">
+  <div class="name">
+    <!-- 把它當作一般JavaScript 處理並回傳字串值給UI-->
+    {{ name + "(" + code + ")" }}
+  </div>
+  <!--[]連結運算式的值與方括號間的DOM屬性。[]是可用於元素上任何屬性以單向連結元件到UI的通用語法。  -->
+  <!-- 連結DOM元素的類別屬性到運算式的值-->
+  <!-- Angular將它當作一般JavaScript運算式計算並指派值給div元素的類別屬性 -->
+  <div class="price" [class]="positiveChange ? 'positive' : 'negative'">
+    ${{ price }}
+  </div>
+  <!-- 連結事件: 等號左邊的部分是要連結的事件，此例中是click事件。 -->
+  <!-- 等號右邊的部分指Angular應該在事件發生時執行的模板陳述。此例中，我們想要它執行新建構的toggleFavorite函式 -->
+  <button (click)="toggleFavorite()" [disabled]="favorite">
+    Add to Favorite
+  </button>
+</div>
