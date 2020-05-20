@@ -1,5 +1,9 @@
 <p>stock-item works!</p>
-<div class="stock-container">
+<!-- trackBy使用trackStockByCode函數回傳值來決定如何識別個別元素。 -->
+<div
+  class="stock-container"
+  *ngFor="let stock of stocks; index as i; trackBy: trackStockByCode"
+>
   <div class="name">
     <!-- 把它當作一般JavaScript 處理並回傳字串值給UI-->
     <!-- 使用TypeScript自定義型別，必須透過stock變數而非直接存取。 -->
@@ -18,39 +22,47 @@
   </div>
 
   <!-- ngClass的寫法: -->
-  <div class="price" [ngClass]="stockClasses">${{ stock.price }}</div>
+  <!-- <div class="price" [ngClass]="stockClasses">${{ stock.price }}</div> -->
 
   <!-- ngStyle的寫法: -->
   <!-- ngStyle指令連結 -->
-  <div class="price" [ngStyle]="stockStyles">${{ stock.price }}</div>
+  <!-- <div class="price" [ngStyle]="stockStyles">${{ stock.price }}</div> -->
 
   <!-- 使用純量版本的類別與樣式連結來新增或刪除一個特定類別/樣式，而不是全有或全無的[class]連結。-->
   <!-- 語法 : 根據運算式的真偽新增或刪除一個特定類別: [class.class-name] = "express" -->
   <!-- 若上漲則套用positive類別，若不是則刪除它 -->
-  <div
+  <!-- <div
     class="price"
     [class.positive]="stock.isPositiveChange()"
     [class.negative]="!stock.isPositiveChange()"
   >
     ${{ stock.price }}
-  </div>
+  </div> -->
 
   <!-- 樣式連結 -->
-  <div
+  <!-- <div
     class="price"
     [style.background-color]="stock.isPositiveChange() ? 'green' : 'red'"
   >
     ${{ stock.price }}
-  </div>
+  </div> -->
   <!-- 連結事件: 等號左邊的部分是要連結的事件，此例中是click事件。 -->
   <!-- 等號右邊的部分指Angular應該在事件發生時執行的模板陳述。此例中，我們想要它執行新建構的toggleFavorite函式 -->
   <!-- 使用$event存取底層DOM事件 -->
-  <button (click)="toggleFavorite($event)" [disabled]="stock.favorite">
+  <button (click)="toggleFavorite($event, i)" [disabled]="stock.favorite">
     Add to Favorite
   </button>
 
   <!-- 使用ngIf的寫法 -->
-  <button (click)="toggleFavorite($event)" *ngIf="!stock.favorite">
+  <!-- <button (click)="toggleFavorite($event)" *ngIf="!stock.favorite">
     Add to Favorite
-  </button>
+  </button> -->
 </div>
+<!-- ngSwitch -->
+<!-- <div [ngSwitch]="security.type">
+   <stock-item *ngSwitch="'stock'" [item]="security"></stock-item>
+   <option-item *ngSwitch="'option'" [item]="security"></option-item>
+   <derivative-item *ngSwitch="'derivative'" [item]="security"></derivative-item>
+   <mutual-fund-item *ngSwitch="'mutual-fund'" [item]="security"></mutualfund-item>
+   <unknown-item *ngSwitchDefault [item]="security"></unknown-item>
+</div> -->

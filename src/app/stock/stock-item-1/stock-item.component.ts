@@ -38,12 +38,17 @@ export class StockItemComponent implements OnInit {
     // 使用TypeScript 定義型別的寫法:
     this.stock = new Stock('Test Stock Company', 'TSC', 85, 80);
 
-    //初始化stocks
-    
-    let diff = this.stock.price / this.stock.previousPrice - 1;
-    let largeChange = Math.abs(diff) > 0.01;
+    // 初始化stocks
+    this.stocks = [
+      new Stock('Test Stock Company', 'TSC', 85, 80),
+      new Stock('Second Stock Company', 'SSC', 10, 20),
+      new Stock('Last Stock Company', 'LSC', 876, 765),
+    ];
 
-    //ngClass的寫法
+    const diff = this.stock.price / this.stock.previousPrice - 1;
+    const largeChange = Math.abs(diff) > 0.01;
+
+    // ngClass的寫法
     this.stockClasses = {
       positive: this.stock.isPositiveChange(),
       negative: !this.stock.isPositiveChange(),
@@ -51,7 +56,7 @@ export class StockItemComponent implements OnInit {
       'small-change': !largeChange,
     };
 
-    //ngStyle的寫法
+    // ngStyle的寫法
     this.stockStyles = {
       color: this.stock.isPositiveChange() ? 'green' : 'red',
       'font-size': largeChange ? '1.2em' : '0.8em',
@@ -59,10 +64,19 @@ export class StockItemComponent implements OnInit {
   }
 
   // 點擊時觸發的函式
-  toggleFavorite(event) {
+  toggleFavorite(event, index) {
     // 使用event存取底層DOM事件
-    console.log('We are toggling the favorite state for this stock', event);
+    console.log(
+      'We are toggling the favorite state for this stock',
+      index,
+      event
+    );
     // this.favorite = !this.favorite;
-    this.stock.favorite = !this.stock.favorite;
+    this.stocks[index].favorite = !this.stocks[index].favorite;
+  }
+
+  // 使用函數回傳值來決定如何識別個別元素。
+  trackStockByCode(index, stock) {
+    return stock.code;
   }
 }
