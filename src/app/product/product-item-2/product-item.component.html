@@ -8,5 +8,11 @@
   <button (click)="removeFromCart()" [disabled]="cartCount === 0">
     Remove from Cart
   </button>
+  <button (click)="removeFromCart()" *ngIf="cartCount > 0">
+    Remove from Cart
+  </button>
+  <select id="my-number">
+    <option [value]="qty" *ngFor="let qty of quantities">{{qty}}</option>
+  </select>
 </div>
 <div class="cart">數量{{ cartCount }}</div>
