@@ -1,9 +1,15 @@
 <p>stock-item works!</p>
+
+<div class="stock-container">
+  <div class="name">
+    {{stock.name + "(" + stock.code + ")" }}
+  </div>
+  <div class="price">${{stock.price}}</div>
+</div>
+<button (click)="onToggleFavorite($event)" *ngIf="!stock.favorite">Add to Favorite</button>
+
 <!-- trackBy使用trackStockByCode函數回傳值來決定如何識別個別元素。 -->
-<div
-  class="stock-container"
-  *ngFor="let stock of stocks; index as i; trackBy: trackStockByCode"
->
+<div class="stock-container" *ngFor="let stock of stocks; index as i; trackBy: trackStockByCode">
   <div class="name">
     <!-- 把它當作一般JavaScript 處理並回傳字串值給UI-->
     <!-- 使用TypeScript自定義型別，必須透過stock變數而非直接存取。 -->
@@ -14,10 +20,7 @@
   <!-- Angular將它當作一般JavaScript運算式計算並指派值給div元素的類別屬性 -->
 
   <!-- [class] : 屬性連結的寫法 -->
-  <div
-    class="price"
-    [class]="stock.isPositiveChange() ? 'positive' : 'negative'"
-  >
+  <div class="price" [class]="stock.isPositiveChange() ? 'positive' : 'negative'">
     ${{ stock.price }}
   </div>
 
@@ -49,9 +52,9 @@
   <!-- 連結事件: 等號左邊的部分是要連結的事件，此例中是click事件。 -->
   <!-- 等號右邊的部分指Angular應該在事件發生時執行的模板陳述。此例中，我們想要它執行新建構的toggleFavorite函式 -->
   <!-- 使用$event存取底層DOM事件 -->
-  <button (click)="toggleFavorite($event, i)" [disabled]="stock.favorite">
+  <!-- <button (click)="toggleFavorite($event, i)" [disabled]="stock.favorite">
     Add to Favorite
-  </button>
+  </button> -->
 
   <!-- 使用ngIf的寫法 -->
   <!-- <button (click)="toggleFavorite($event)" *ngIf="!stock.favorite">

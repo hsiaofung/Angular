@@ -337,7 +337,7 @@
     </svg>
 
   </div>
-  <app-stock-item></app-stock-item>
+  <app-stock-item [stock]="stock" (toggleFavorite)="onToggleFavorite($event)"></app-stock-item>
   <app-product-item></app-product-item>
   <!-- Resources -->
   <h2>Resources</h2>
