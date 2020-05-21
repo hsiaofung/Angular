@@ -1,0 +1,11 @@
+<p>product-list-component works!</p>
+<div *ngFor="let product of products; index as i">
+  <div>
+    <img [src]="product.img" />
+  </div>
+  <h3>{{product.name}}</h3>
+  <h3>{{product.price}}</h3>
+  <button (click)="addToCart()">Add to Cart</button>
+  <span>數量{{cartCount}}</span>
+  <button (click)="removeFromCart()">Remove from Cart</button>
+</div>

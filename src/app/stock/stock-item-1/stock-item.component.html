@@ -4,9 +4,17 @@
   <div class="name">
     {{stock.name + "(" + stock.code + ")" }}
   </div>
-  <div class="price">${{stock.price}}</div>
+  <div class="price" [class]="stock.isPositiveChange() ? 'positive' : 'negative'">
+    ${{ stock.price }}
+  </div>
 </div>
-<button (click)="onToggleFavorite($event)" *ngIf="!stock.favorite">Add to Favorite</button>
+
+<!-- 投射用的ng-content元素 -->
+<!-- 刪除前面的按鈕，讓元件使用者自行決定要顯示什麼按鈕。 -->
+<ng-content></ng-content>
+
+<!-- <button (click)="onToggleFavorite($event)" *ngIf="!stock.favorite">Add to Favorite</button>
+<button (click)="changeStockPrice()">Change Price</button> -->
 
 <!-- trackBy使用trackStockByCode函數回傳值來決定如何識別個別元素。 -->
 <div class="stock-container" *ngFor="let stock of stocks; index as i; trackBy: trackStockByCode">

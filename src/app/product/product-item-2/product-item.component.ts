@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../../model/product';
 
 @Component({
@@ -12,7 +12,8 @@ export class ProductItemComponent implements OnInit {
   public removeBtnDisable: boolean;
 
   // 宣告變數products為商品清單
-  public products: Array<Product>;
+  @Input() public products: Array<Product>;
+  // public products: Array<Product>;
   public quantities: Array<number>;
   constructor() {}
 
@@ -25,11 +26,11 @@ export class ProductItemComponent implements OnInit {
     );
     this.cartCount = 0;
     this.removeBtnDisable = false;
-    this.products = [
-      new Product('戒指', 2000, '../../assets/nav-thm.jpg', false),
-      new Product('項鍊', 3000, '../../assets/nav-thm.jpg', false),
-      new Product('手鐲', 4000, '../../assets/nav-thm.jpg', false),
-    ];
+    // this.products = [
+    //   new Product('戒指', 2000, '../../assets/nav-thm.jpg', false),
+    //   new Product('項鍊', 3000, '../../assets/nav-thm.jpg', false),
+    //   new Product('手鐲', 4000, '../../assets/nav-thm.jpg', false),
+    // ];
     this.quantities = [];
     for (let i = 0; i <= 20; i++) {
       this.quantities.push(i);
